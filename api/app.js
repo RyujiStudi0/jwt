@@ -52,7 +52,7 @@ app.post("/login", jsonParser, function (req, res, next) {
         users[0].password,
         function (err, isLogin) {
           if (isLogin) {
-            var token = jwt.sign({ email : users[0].email }, secret, { expiresIn: '1h' });
+            var token = jwt.sign({ email: users[0].email }, secret, { expiresIn: '1h' });
             res.json({ status: "ok", message: "Login Success", token });
           } else {
             res.json({ status: "error", message: "Login Failed" });
@@ -65,11 +65,11 @@ app.post("/login", jsonParser, function (req, res, next) {
 
 app.post("/authen", jsonParser, function (req, res, next) {
   try {
-    const token = req.headers.authorization.split(' ')[1]
-    var decoded = jwt.verify(token, secret)
-    res.json({status: "ok",decoded})
+    const token = req.headers.authorization.split(' ')[1];
+    var decoded = jwt.verify(token, secret);
+    res.json({ status: "ok", decoded });
   } catch (error) {
-    res.json({ status: "error", message: err.message})
+    res.json({ status: "error", message: error.message });
   }
 });
 
